@@ -33,7 +33,7 @@ data IntTree = IntLeaf | IntNode IntTree (Int, Int) IntTree
 {- HLINT ignore "Use record patterns" -}
 instance Eq IntTree where
   IntLeaf == IntLeaf = True
-  IntNode _ _ _ == IntNode _ _ _ = todo "1.2"
+  IntNode l1 (_, v1) r1 == IntNode l2 (_, v2) r2 = l1 == l2 && v1 == v2 && r1 == r2
   _ == _ = False
 
 
