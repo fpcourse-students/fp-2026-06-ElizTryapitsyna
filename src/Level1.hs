@@ -59,5 +59,15 @@ instance Functor Tree where
 class StructEq (f :: Type -> Type) where
   (==#) :: f a -> f b -> Bool
 
-todoImpl ''StructEq ''[]
-todoImpl ''StructEq ''Tree
+instance StructEq [] where
+  [] ==# [] = True
+  _ ==# [] = False
+  [] ==# _ = False
+  (_:xs) ==# (_:ys) = xs ==# ys
+
+instance StructEq Tree where
+  Leaf ==# Leaf = True
+  _ ==# Leaf = False
+  Leaf ==# _ = False
+  Node _ xs ==# Node _ ys = xs ==# ys && and (zipWith (==#) xs ys)
+
