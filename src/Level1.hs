@@ -44,7 +44,9 @@ instance Eq IntTree where
 data Tree a = Leaf | Node a [Tree a]
   deriving (Eq, Show)
 
-todoImpl ''Functor ''Tree
+instance Functor Tree where
+  fmap _ Leaf = Leaf
+  fmap f (Node x children) = Node (f x) (fmap (fmap f) children)
 
 
 -- 1.4. Сравнение структур.
